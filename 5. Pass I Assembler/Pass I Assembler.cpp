@@ -39,6 +39,19 @@ int main()
                     loc = stoi(instr[2]);
                     inter += to_string(loc) + ") (AD," + AD.at(instr[1]) +") (C," + instr[2] + ")";
                 }
+                if(instr[1] == "EQU")
+                {
+                    symbols.push_back(instr[0]);
+                    symtab.insert(pair<string, string>(instr[0], symtab.at(instr[2])));
+                }
+                if(instr[1] == "ORIGIN")
+                {
+                    string label = instr[2].substr(0, instr[2].find('+'));
+                    if (label == instr[2]) // LOOP
+                        loc = stoi(symtab.at(label));
+                    else // LOOP + 2
+                        loc = stoi(symtab.at(label)) + stoi(instr[2].substr(instr[2].find('+')+1, instr[2].length()));
+                }
                 // Rest of Assembler Directives
             }
             if(IS.count(instr[1]) > 0) // Statement Is Imperative Statement
@@ -54,8 +67,8 @@ int main()
                     inter += to_string(loc) + ") (IS," + IS.at(instr[1]) + ")";
                 else if(instr[1] == "READ" || instr[1] == "PRINT")
                 {
-                    symtab.insert(pair<string, string>(instr[2],"NULL"));
-                    symbols.push_back(instr[2]);
+                    //symtab.insert(pair<string, string>(instr[2],"NULL"));
+                    //symbols.push_back(instr[2]);
                     inter += to_string(loc) + ") (IS," + IS.at(instr[1]) + ") (S," + to_string(symbols.size()-1) + ")"; // Determine if symbol or literal
                 }
                 else
