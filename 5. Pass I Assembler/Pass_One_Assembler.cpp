@@ -225,7 +225,7 @@ int main()
     }
     lit_file.close();
 
-    // Displaying Pooltab Table
+    // Pooltab Table
     ofstream pool_file ("Pooltab Table.txt");
     pool_file<<"Pooltab Table"<<endl;
     pool_file<<"\nIndex\tLITTAB#"<<endl;
