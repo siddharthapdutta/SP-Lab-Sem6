@@ -1,0 +1,10 @@
+Symbol Table
+
+Index	Symbol	Address
+0	A	212
+1	LOOP	203
+2	B	213
+3	NEXT	209
+4	BACK	203
+5	LAST	211
+6	C	214

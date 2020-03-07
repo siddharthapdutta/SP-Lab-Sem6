@@ -2,6 +2,9 @@
 #define DATA_H_INCLUDED
 #include <map>
 #include <string>
+#include <list>
+#include <sstream>
+#include <iostream>
 #include <algorithm> // For count function
 
 bool is_literal(std::string s)
@@ -10,6 +13,30 @@ bool is_literal(std::string s)
         return true;
     else
         return false;
+}
+
+int index_symbol(std::list<std::string> symbols, std::string label)
+{
+    int index = 0;
+    for (const auto& i : symbols)
+    {
+        if (label == i)
+            break;
+        index += 1;
+    }
+    return index;
+}
+
+int index_literal(std::list<std::string> literals, std::string literal, int starting_index)
+{
+    int index = 0;
+    for (const auto& i : literals)
+    {
+        if (literal == i && index >= starting_index)
+            return index;
+        index += 1;
+    }
+    return -1;
 }
 
 const std::map<std::string, std::string> IS = {
@@ -27,32 +54,19 @@ const std::map<std::string, std::string> IS = {
 };
 
 const std::map<std::string, std::string> BC = {
-    {"LT","01"},
-    {"LE","02"},
-    {"EQ","03"},
-    {"GT","04"},
-    {"GE","05"},
-    {"ANY","06"}
-};
-
-const std::map<std::string, std::string> DL = {
-    {"DC","00"},
-    {"DS","01"}
-};
-
-const std::map<std::string, std::string> AD = {
-    {"START","00"},
-    {"END","01"},
-    {"EQU","03"},
-    {"LTORG","04"},
-    {"ORIGIN","05"}
+    {"LT","1"},
+    {"LE","2"},
+    {"EQ","3"},
+    {"GT","4"},
+    {"GE","5"},
+    {"ANY","6"}
 };
 
 const std::map<std::string, std::string> REG = {
-    {"AREG","0"},
-    {"BREG","1"},
-    {"CREG","3"},
-    {"DREG","4"}
+    {"AREG,","1"},
+    {"BREG,","2"},
+    {"CREG,","3"},
+    {"DREG,","4"}
 };
 
 #endif // DATA_H_INCLUDED

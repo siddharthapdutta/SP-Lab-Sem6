@@ -1,0 +1,7 @@
+Literal Table
+
+Index	Literal	Address
+0	'5'	207
+1	'1'	208
+2	'1'	215
+3	'2'	216
