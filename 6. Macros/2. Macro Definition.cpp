@@ -6,29 +6,36 @@ given input assembly source code.
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
+#include <vector>
 
 using namespace std;
 int main()
 {
     string line;
-    string start = "MACRO";
-    string end = "MEND";
     int flag = -1;
-    ifstream inpfile ("Source Program.txt");
-    ofstream outfile ("Macro Definition.txt");
+    ifstream inpfile ("Input Program with MACROS.txt");
+    ofstream outfile ("Macro Definitions.txt");
     if (inpfile.is_open())
     {
         while (getline(inpfile, line))
         {
-            if (line.substr(0, start.length()) == start)
+            stringstream check(line);
+            string inter;
+            vector<string> instruction;
+            while(getline(check, inter, '\t'))
+                instruction.push_back(inter);
+            if (instruction[1] == "MACRO")
                 flag = 1;
             if (flag == 1)
                 outfile<<line<<endl;
-            if (line.substr(0, end.length()) == end)
+            if (instruction[1] == "MEND")
+            {
+                outfile<<endl;
                 flag = -1;
+            }
         }
     }
-    cout<<"Macro definition saved in: 'Macro Definition.txt'"<<endl;
     inpfile.close();
     outfile.close();
     return 0;
