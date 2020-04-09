@@ -47,6 +47,8 @@ int main()
                     for (int i = 1; i < records.size(); i+=2)
                         outfile<<records[i]<<"\t"<<csaddr+stoi(records[i+1])<<endl;
                 }
+                if(records[0] == "E")
+                    break;
             }
             csaddr += cslth;
         }
